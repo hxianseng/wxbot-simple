@@ -117,7 +117,7 @@ ipch/
 *.vsp
 *.vspx
 *.sap
-
+ts/
 # Visual Studio Trace Files
 *.e2e
 
@@ -396,3 +396,6 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+wxbot-simple.memory-card.json
+.gitignore
+test.ts

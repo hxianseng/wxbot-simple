@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "commonjs", //规定js模块化规范
+    "esModuleInterop": true, //兼容库的引用方式
+    "outDir": "./src",
+    "removeComments": true,//是否将编译后的文件注释删掉
+    "strict": true,//是否启动所有类型检查
+    "allowJs": true, //是否允许编译js文件
+    "checkJs": true,//是否检查和报告js文件中的错误
+  },
+  "include": [
+    "ts/**/*",
+  ],
+  "exclude": [
+    "node_modules/",
+  ]
+}
