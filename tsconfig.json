@@ -1,17 +1,24 @@
 {
   "compilerOptions": {
-    "module": "commonjs", //规定js模块化规范
+    "target": "ES2022",
+    "module": "ES2022", //规定js模块化规范
+    "moduleResolution": "node",
     "esModuleInterop": true, //兼容库的引用方式
     "outDir": "./src",
-    "removeComments": true,//是否将编译后的文件注释删掉
-    "strict": true,//是否启动所有类型检查
+    "removeComments": true, //是否将编译后的文件注释删掉
+    "strict": true, //是否启动所有类型检查
     "allowJs": true, //是否允许编译js文件
-    "checkJs": true,//是否检查和报告js文件中的错误
+    "checkJs": true, //是否检查和报告js文件中的错误
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
   },
   "include": [
     "ts/**/*",
   ],
   "exclude": [
     "node_modules/",
-  ]
+  ],
+  "ts-node": {
+    "esm": true, // «———— enabling ESM for ts-node   
+  }, 
 }

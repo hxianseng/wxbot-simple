@@ -1,35 +1,39 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-exports.__esModule = true;
-exports.Request = void 0;
-var axios_1 = __importDefault(require("axios"));
-var config_1 = __importDefault(require("../config"));
+import axios from 'axios';
+import config from '../config.js';
 var headers;
-axios_1["default"].interceptors.request.use(function (config) {
+axios.interceptors.request.use((config) => {
     return config;
-}, function (err) {
+}, (err) => {
     console.log(err);
     return Promise.resolve(err);
 });
-axios_1["default"].interceptors.response.use(function (data) {
+axios.interceptors.response.use((data) => {
     return data;
-}, function (err) {
+}, (err) => {
     console.log(err);
     return null;
 });
-var Request = (function () {
-    function Request() {
-    }
-    Request.sendTextGPT = function (data) {
-        return (0, axios_1["default"])({
-            url: "".concat(config_1["default"].url_gpt),
+export class Request {
+    static sendTextGPT(data) {
+        return axios({
+            url: `${config.url_gpt}`,
             method: 'POST',
             headers: headers,
             data: data
         });
-    };
-    return Request;
-}());
-exports.Request = Request;
+    }
+    static async send_message(data) {
+        const { ChatGPTUnofficialProxyAPI } = await import('chatgpt');
+        const chatgpt = new ChatGPTUnofficialProxyAPI({
+            accessToken: config.access_token,
+            apiReverseProxyUrl: config.chatgpt_reverse_proxy,
+            model: config.chatgpt_model,
+        });
+        const response = await chatgpt.sendMessage(data.text, {
+            conversationId: data.conversation_id,
+            parentMessageId: data.parent_message_id,
+            timeoutMs: Number(0),
+        });
+        return response;
+    }
+}
