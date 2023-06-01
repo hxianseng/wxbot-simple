@@ -2,7 +2,7 @@ import { log } from "wechaty";
 import { Request } from "../utils/request.js";
 import { bot } from "./main.js";
 import { util } from "./util.js";
-import config from "../config.js";
+import config from "../conf/config.js";
 export class Message {
     static async msg(data) {
         const room = data.room();

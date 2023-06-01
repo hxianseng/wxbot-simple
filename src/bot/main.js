@@ -1,7 +1,7 @@
 import { WechatyBuilder, log } from "wechaty";
 import qrcode_terminal from "qrcode-terminal";
 import { Message } from "./message.js";
-import config from "../config.js";
+import config from "../conf/config.js";
 const bot = WechatyBuilder.build({
     name: "wxbot-simple",
     puppet: "wechaty-puppet-wechat",

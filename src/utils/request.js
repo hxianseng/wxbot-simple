@@ -1,5 +1,5 @@
 import axios from 'axios';
-import config from '../config.js';
+import config from '../conf/config.js';
 var headers;
 axios.interceptors.request.use((config) => {
     return config;

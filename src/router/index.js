@@ -1,5 +1,5 @@
 import express from "express";
-import config from "../config.js";
+import config from "../conf/config.js";
 import { bot, main } from "../bot/main.js";
 const router = express.Router();
 router.use(function (req, res, next) {
