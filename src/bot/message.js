@@ -88,30 +88,34 @@ export class Message {
                     console.log(`第${i + 1}次浇水`);
                     let waterResult;
                     res = await Request.initForFarm('waterGoodForFarm', {}, cookie);
-                    if (res.status == 200) {
-                        if (res.data.code == 0) {
-                            waterResult = res.data;
+                    try {
+                        if (res.status == 200) {
+                            if (res.data.code == 0) {
+                                waterResult = res.data;
+                            }
+                            else {
+                                await util.say(contact, `任务失败------>${JSON.stringify(res.data)}`);
+                                await util.say(contact, `结束------>浇水任务`);
+                                break;
+                            }
                         }
                         else {
-                            await util.say(contact, `任务失败------>${JSON.stringify(res.data)}`);
+                            await util.say(contact, `东东农场: API查询请求失败`);
+                            continue;
+                        }
+                        if (waterResult.finished) {
+                            await util.say(contact, `水果已成熟`);
+                            await util.say(contact, `结束------>浇水任务`);
+                            break;
+                        }
+                        if (waterResult.totalEnergy < 10) {
+                            await util.say(contact, `水滴不够，结束浇水`);
                             await util.say(contact, `结束------>浇水任务`);
                             break;
                         }
                     }
-                    else {
-                        await util.say(contact, `东东农场: API查询请求失败`);
-                        await util.say(contact, `结束------>浇水任务`);
-                        break;
-                    }
-                    if (waterResult.finished) {
-                        await util.say(contact, `水果已成熟`);
-                        await util.say(contact, `结束------>浇水任务`);
-                        break;
-                    }
-                    if (waterResult.totalEnergy < 10) {
-                        await util.say(contact, `水滴不够，结束浇水`);
-                        await util.say(contact, `结束------>浇水任务`);
-                        break;
+                    catch (err) {
+                        console.log(err);
                     }
                     console.log(`等待10s浇下一次`);
                     await wait(10 * 1000);
